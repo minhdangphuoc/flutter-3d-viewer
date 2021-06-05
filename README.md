@@ -6,7 +6,7 @@
 - [Minh Dang](https://github.com/minhdangphuoc)
 - [socsecurity](https://github.com/socsecurity)
 ## User Interface
-![alt homescreen](homescreen.png "Home Screen")
+![alt homescreen](img/homescreen.png "Home Screen")
 ### Color Pallete
 - ![#2E3837](https://via.placeholder.com/15/2E3837/000000?text=+)`#2E3837`
 - ![#166678](https://via.placeholder.com/15/166678/000000?text=+)`#166678`
