@@ -36,7 +36,7 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
 
   Widget getWidget(context, widget) {
     return Material(
-      elevation: 80.0,
+      elevation: 64.0,
       child: Container(
         width: widthAnimation.value,
         color: drawerBackgroundColor,
@@ -79,11 +79,11 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 icon: AnimatedIcons.close_menu,
                 progress: _animationController,
                 color: selectedColor,
-                size: 50.0,
+                size: 32.0,
               ),
             ),
             SizedBox(
-              height: 50.0,
+              height: 32.0,
             ),
           ],
         ),

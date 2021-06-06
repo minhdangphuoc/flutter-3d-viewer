@@ -35,13 +35,13 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        widget.onTap;
+        widget.onTap();
       },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12.0)),
           color: widget.isSelected
-              ? Colors.transparent.withOpacity(0.3)
+              ? selectedColor.withOpacity(0.3)
               : Colors.transparent,
         ),
         width: widthAnimation.value,
