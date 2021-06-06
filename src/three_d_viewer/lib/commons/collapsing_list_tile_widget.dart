@@ -26,7 +26,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
   void initState() {
     super.initState();
     widthAnimation =
-        Tween<double>(begin: 384, end: 70).animate(widget.animationController);
+        Tween<double>(begin: 200, end: 70).animate(widget.animationController);
     sizedBoxAnimation =
         Tween<double>(begin: 10, end: 0).animate(widget.animationController);
   }
@@ -45,7 +45,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
               : Colors.transparent,
         ),
         width: widthAnimation.value,
-        margin: EdgeInsets.symmetric(horizontal: 16.0),
+        margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
         child: Row(
           children: <Widget>[
@@ -57,9 +57,12 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
             SizedBox(width: sizedBoxAnimation.value),
             (widthAnimation.value >= 190)
                 ? Text(widget.title,
-                    style: widget.isSelected
+                    style: widget.isSelected &&
+                            MediaQuery.of(context).size.width > 540
                         ? listTitleSelectedTextStyle
-                        : listTitleDefaultTextStyle)
+                        : MediaQuery.of(context).size.width < 540
+                            ? isCollapseStyle
+                            : listTitleDefaultTextStyle)
                 : Container()
           ],
         ),

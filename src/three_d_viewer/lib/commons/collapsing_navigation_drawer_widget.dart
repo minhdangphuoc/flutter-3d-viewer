@@ -29,26 +29,46 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _animationController,
-      builder: (context, widget) => getWidget(context, widget),
-    );
+        animation: _animationController,
+        builder: (context, widget) => getWidget(context, widget));
   }
 
   Widget getWidget(context, widget) {
     return Material(
-      elevation: 64.0,
+      elevation: 4.0,
       child: Container(
-        width: widthAnimation.value,
+        width: MediaQuery.of(context).size.width > 540 ? 384 : 98,
         color: drawerBackgroundColor,
         child: Column(
           children: <Widget>[
             Divider(
-              height: 32.0,
+              height: 8.0,
+              color: Colors.transparent,
+            ),
+            RichText(
+              textAlign: TextAlign.right,
+              text: TextSpan(
+                  text: 'History',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.w500,
+                    fontSize: MediaQuery.of(context).size.width > 540 ? 32 : 0,
+                    color: MediaQuery.of(context).size.width > 540
+                        ? Color(0xFFE1F6F4)
+                        : Colors.transparent,
+                  )),
+            ),
+            Divider(
+              height: 8.0,
+              color: Colors.transparent,
             ),
             Expanded(
               child: ListView.separated(
                 separatorBuilder: (context, counter) {
-                  return Divider(height: 16.0);
+                  return Divider(
+                    height: 0.0,
+                    color: Colors.transparent,
+                  );
                 },
                 itemBuilder: (context, counter) {
                   return CollapsingListTile(
@@ -64,22 +84,6 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                   );
                 },
                 itemCount: navigationItems.length,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  isCollapsed = !isCollapsed;
-                  isCollapsed
-                      ? _animationController.forward()
-                      : _animationController.reverse();
-                });
-              },
-              child: AnimatedIcon(
-                icon: AnimatedIcons.close_menu,
-                progress: _animationController,
-                color: selectedColor,
-                size: 32.0,
               ),
             ),
             SizedBox(
