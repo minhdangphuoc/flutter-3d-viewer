@@ -1,6 +1,8 @@
 import '../custom_navigation_drawer.dart';
 import 'package:flutter/material.dart';
 
+import 'bouncing_button.dart';
+
 class CollapsingNavigationDrawer extends StatefulWidget {
   @override
   CollapsingNavigationDrawerState createState() {
@@ -87,8 +89,9 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
               ),
             ),
             SizedBox(
-              height: 32.0,
+              height: 20.0,
             ),
+            BouncingButton()
           ],
         ),
       ),
