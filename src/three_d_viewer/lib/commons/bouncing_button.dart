@@ -4,7 +4,6 @@ import 'package:filesystem_picker/filesystem_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'package:permission_handler/permission_handler.dart';
-import 'three_d_view.dart';
 import '../theme.dart';
 
 class BouncingButton extends StatefulWidget {
@@ -12,15 +11,12 @@ class BouncingButton extends StatefulWidget {
   _BouncingButtonState createState() => _BouncingButtonState();
 }
 
-String? filePath;
-
 class _BouncingButtonState extends State<BouncingButton>
     with SingleTickerProviderStateMixin {
   late double _scale;
   late AnimationController _controller;
-
+  late String dirPath;
   Directory? rootPath;
-  FileTileSelectMode filePickerSelectMode = FileTileSelectMode.checkButton;
   final bool isDesktop = !(Platform.isAndroid || Platform.isIOS);
   @override
   void initState() {
@@ -39,37 +35,27 @@ class _BouncingButtonState extends State<BouncingButton>
   }
 
   Future<void> _prepareStorage() async {
-    rootPath = Directory(path.dirname('/home'));
+    rootPath = Directory(path.dirname('//home'));
     setState(() {});
   }
 
-  Future<void> _openFile(BuildContext context) async {
-    String path = await FilesystemPicker.open(
-      title: 'Open file',
+  Future<void> _pickDir(BuildContext context) async {
+    String? path = await FilesystemPicker.open(
+      title: 'Open resource folder',
       context: context,
-      rootDirectory: rootPath,
-      fsType: FilesystemType.file,
+      rootDirectory: rootPath!,
+      fsType: FilesystemType.folder,
+      pickText: 'Select this directory',
       folderIconColor: Colors.teal,
-      allowedExtensions: ['.obj'],
-      fileTileSelectMode: filePickerSelectMode,
       requestPermission: !isDesktop
           ? () async => await Permission.storage.request().isGranted
           : null,
     );
 
-    if (path != null) {
-      File file = File('$path');
-      String contents = await file.readAsString();
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(contents),
-        ),
-      );
-    }
-
     setState(() {
-      filePath = path;
+      dirPath = path;
+      print(dirPath);
+    
     });
   }
 
@@ -132,9 +118,9 @@ class _BouncingButtonState extends State<BouncingButton>
 
   void _tapDown(TapDownDetails details) {
     _controller.forward();
-    _openFile(context);
+    _pickDir(context); //open dir picker
   }
-  
+
   void _tapUp(TapUpDetails details) {
     _controller.reverse();
   }
