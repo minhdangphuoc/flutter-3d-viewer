@@ -1,4 +1,4 @@
-import 'commons/bouncing_button.dart';
+import 'package:three_d_viewer/commons/three_d_view.dart';
 import 'custom_navigation_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -22,14 +22,17 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: CollapsingNavigationDrawer(),
         body: Stack(
-          children: <Widget>[
-            Container(
-              color: selectedColor,
-            ),
-            CollapsingNavigationDrawer(),
-          ],
-        ));
+      children: <Widget>[
+        Container(
+          color: selectedColor,
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+          child: Center(child: ThreeDView()),
+        ),
+        CollapsingNavigationDrawer(),
+      ],
+    ));
   }
 }
