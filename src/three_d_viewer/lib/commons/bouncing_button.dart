@@ -35,7 +35,7 @@ class _BouncingButtonState extends State<BouncingButton>
   }
 
   Future<void> _prepareStorage() async {
-    rootPath = Directory(path.dirname('//home'));
+    rootPath = Directory(path.dirname('/'));
     setState(() {});
   }
 
@@ -55,7 +55,6 @@ class _BouncingButtonState extends State<BouncingButton>
     setState(() {
       dirPath = path;
       print(dirPath);
-    
     });
   }
 
